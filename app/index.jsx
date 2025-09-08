@@ -1,24 +1,46 @@
+import { useState } from "react";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 
+const pomodoro = [
+  {
+    id: "fokus",
+    initialValue: 25,
+    image: require('./foco.png'),
+    display: "Foco",
+  },
+  {
+    id: "short",
+    initialValue: 5,
+    image: require('./descanso_curto.png'),
+    display: "Pausa curta",
+  },
+  {
+    id: "long",
+    initialValue: 45,
+    image: require('./descanso_longo.png'),
+        display: "Pausa curta",
+  },
+  
+] 
+
+
 export default function Index() {
+
+const [timerType, setTimerType] = useState(pomodoro[1]) // timerType é o Hook e setTimerType é a função
+
   return (
     <View style={styles.container}>
-      <Image source={require('./foco.png')}/>
+      <Image source={timerType.image}/>
       <View style={styles.actions}>
 
         <View styles={styles.context}>          
           <Pressable style={styles.contextButtonActive}>
-            <Text style={styles.contextButtonText}>Foco</Text>
+            <Text style={styles.contextButtonText}>{timerType.display}</Text>
           </Pressable>
-          <Pressable>
-            <Text style={styles.contextButtonText}>Pausa Curta</Text>
-          </Pressable>
-          <Pressable>
-            <Text style={styles.contextButtonText}>Pausa Longa</Text>
-          </Pressable>
+
         </View>
 
-        <Text style={styles.timer}>25:00</Text>
+        <Text style={styles.timer}>{timerType.initialValue}</Text>
         <Pressable style={styles.button}>
           <Text style={styles.buttonText}>Começar</Text>
         </Pressable>
@@ -57,6 +79,8 @@ const styles = StyleSheet.create({
     fontSize: 54,
     color: '#FFFFFF',
     fontWeight: "bold",
+    textAlign: "center"
+    
   },
   button: {
     padding: 8,
@@ -75,7 +99,23 @@ const styles = StyleSheet.create({
     color: '#98A0A8',
     fontSize: 13,
     textAlign: "center",
-  }
+  },
+  context: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+  },
+  contextButtonText: {
+    colo: '#FFFF',
+    fontSize: 12.5,
+    padding: 8
+  },
+  contextButtonActive: {
+    backgroundColor: '#144480',
+    borderRadius: 8,
+
+  }, 
+
 
 })
   

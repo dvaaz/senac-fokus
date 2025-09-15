@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
+import { ActionButton } from "../components/ActionButton";
+import { FokusButton } from "../components/FokusButton";
 
 const pomodoro = [
   {
@@ -23,7 +25,6 @@ const pomodoro = [
   
 ] 
 
-
 export default function Index() {
 
 const [timerType, setTimerType] = useState(pomodoro[0]) // timerType é o Hook e setTimerType é a função
@@ -35,12 +36,18 @@ const [timerType, setTimerType] = useState(pomodoro[0]) // timerType é o Hook e
         <View style={styles.context}>          
         { // Dentro do React chamamos o JS dentro de chaves {}
           pomodoro.map( p=>
-            <Pressable key={p} //* um pressable utilizando o hook
-            style={ timerType.id === p.id ? styles.contextButtonActive: null}
-            onPress={() => setTimerType(p)}
-            > 
-            <Text style={styles.contextButtonText}>{p.display}</Text>
-            </Pressable>
+            <ActionButton
+              key={p.id}
+              active={timerType.id}
+              onPress={() => setTimerType(p)}
+              display={p.display}
+            />
+            // <Pressable key={p} //* um pressable utilizando o hook
+            // style={ timerType.id === p.id ? styles.contextButtonActive: null}
+            // onPress={() => setTimerType(p)}
+            // > 
+            // <Text style={styles.contextButtonText}>{p.display}</Text>
+            // </Pressable>
           )
         }
         </View>
@@ -50,9 +57,8 @@ const [timerType, setTimerType] = useState(pomodoro[0]) // timerType é o Hook e
             minute: "2-digit", second: "2-digit"
           })} {/**/}
           </Text>
-        <Pressable style={styles.button}>
-          <Text style={styles.buttonText}>Começar</Text>
-        </Pressable>
+          {/* Chama atraves do component Pressable do FokusButton */}
+          <FokusButton/> 
         </View>
       <View style={styles.footer}>
         <Text style={styles.footerText}>
@@ -87,30 +93,11 @@ actions: {
     alignItems: "center",
     justifyContent: "space-around",
   },
-  contextButtonActive: {
-    backgroundColor: '#144480',
-    borderRadius: 8,
-  },
-  contextButtonText: {
-    color: '#FFF',
-    fontSize: 12.5,
-    padding: 8,
-  },
   timer: {
     fontSize: 54,
     color: '#FFF',
     fontWeight: "bold",
     textAlign: "center",
-  },
-  button: {
-    backgroundColor: '#B872FF',
-    borderRadius: 32,
-    padding: 8,
-  },
-  buttonText: {
-    textAlign: "center",
-    color: '#021123',
-    fontSize: 18,
   },
   footer: {
     width: '80%',

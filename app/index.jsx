@@ -48,15 +48,17 @@ const [timerType, setTimerType] = useState(pomodoro[0]) // timerType é o Hook e
             // > 
             // <Text style={styles.contextButtonText}>{p.display}</Text>
             // </Pressable>
+        
           )
         }
         </View>
-        <Text style={styles.timer}>
-          {/* {timerType.initialValue} */}
+        <TimerButton/>
+        {/*<Text style={styles.timer}>
+          // {timerType.initialValue}
           {new Date(timerType.initialValue*1000).toLocaleTimeString("pt-BR", {
             minute: "2-digit", second: "2-digit"
-          })} {/**/}
-          </Text>
+          })}  
+          </Text>*/}
           {/* Chama atraves do component Pressable do FokusButton */}
           <FokusButton/> 
         </View>
@@ -92,12 +94,6 @@ actions: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-around",
-  },
-  timer: {
-    fontSize: 54,
-    color: '#FFF',
-    fontWeight: "bold",
-    textAlign: "center",
   },
   footer: {
     width: '80%',

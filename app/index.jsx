@@ -2,23 +2,24 @@ import { useState } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import { ActionButton } from "../components/ActionButton";
 import { FokusButton } from "../components/FokusButton";
+import { TimerDisplay } from "../components/TimerDisplay";
 
 const pomodoro = [
   {
     id: "fokus",
-    initialValue: 25,
+    initialValue: 2500,
     image: require('./foco.png'),
     display: "Foco",
   },
   {
     id: "short",
-    initialValue: 5,
+    initialValue: 500,
     image: require('./descanso_curto.png'),
     display: "Pausa curta",
   },
   {
     id: "long",
-    initialValue: 45,
+    initialValue: 4500,
     image: require('./descanso_longo.png'),
         display: "Pausa longa",
   },
@@ -38,10 +39,11 @@ const [timerType, setTimerType] = useState(pomodoro[0]) // timerType é o Hook e
           pomodoro.map( p=>
             <ActionButton
               key={p.id}
-              active={timerType.id}
+              active={timerType.id === p.id}
               onPress={() => setTimerType(p)}
               display={p.display}
             />
+
             // <Pressable key={p} //* um pressable utilizando o hook
             // style={ timerType.id === p.id ? styles.contextButtonActive: null}
             // onPress={() => setTimerType(p)}
@@ -52,14 +54,7 @@ const [timerType, setTimerType] = useState(pomodoro[0]) // timerType é o Hook e
           )
         }
         </View>
-        <TimerButton/>
-        {/*<Text style={styles.timer}>
-          // {timerType.initialValue}
-          {new Date(timerType.initialValue*1000).toLocaleTimeString("pt-BR", {
-            minute: "2-digit", second: "2-digit"
-          })}  
-          </Text>*/}
-          {/* Chama atraves do component Pressable do FokusButton */}
+        <TimerDisplay totalSeconds = {timerType.initialValue}/>
           <FokusButton/> 
         </View>
       <View style={styles.footer}>

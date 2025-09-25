@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import { ActionButton } from "../components/ActionButton";
 import { FokusButton } from "../components/FokusButton";
@@ -29,6 +29,19 @@ const pomodoro = [
 export default function Index() {
 
 const [timerType, setTimerType] = useState(pomodoro[0]) // timerType é o Hook e setTimerType é a função
+const timerRef = useRef(null) /** Hook sincrono do react */
+
+const toogleTimer = () => { /**Função da lógica do botão começar | pausar */
+  
+  if(timerRef.current) {
+  // pausar
+    clearInterval(timerRef.current);
+  return;
+  }
+  /** setInterval é uma função do js PURO, espera uma função e o tempo que será executado (por padrão em milisegundos) */  
+  const id = setInterval(() => {console.log("timer funcionando"), 1000}) ;
+  timerRef.current =id;
+  }
 
   return (
     <View style={styles.container}>
@@ -55,7 +68,10 @@ const [timerType, setTimerType] = useState(pomodoro[0]) // timerType é o Hook e
         }
         </View>
         <TimerDisplay totalSeconds = {timerType.initialValue}/>
-          <FokusButton/> 
+          <FokusButton 
+            press={toogleTimer}
+            title={timerRef.current ? 'Pausar' : 'Começar'}
+          /> 
         </View>
       <View style={styles.footer}>
         <Text style={styles.footerText}>

@@ -7,20 +7,20 @@ import { TimerDisplay } from "../components/TimerDisplay";
 const pomodoro = [
   {
     id: "fokus",
-    initialValue: 2500,
-    image: require('./foco.png'),
+    initialValue: 1800,
+    image: require('../assets/images//foco.png'),
     display: "Foco",
   },
   {
     id: "short",
-    initialValue: 500,
-    image: require('./descanso_curto.png'),
+    initialValue: 900,
+    image: require('../assets/images/descanso_curto.png'),
     display: "Pausa curta",
   },
   {
     id: "long",
-    initialValue: 4500,
-    image: require('./descanso_longo.png'),
+    initialValue: 2700,
+    image: require('../assets/images//descanso_longo.png'),
         display: "Pausa longa",
   },
   
@@ -56,18 +56,11 @@ const toogleTimer = () => { /**Função da lógica do botão começar | pausar *
               onPress={() => setTimerType(p)}
               display={p.display}
             />
-
-            // <Pressable key={p} //* um pressable utilizando o hook
-            // style={ timerType.id === p.id ? styles.contextButtonActive: null}
-            // onPress={() => setTimerType(p)}
-            // > 
-            // <Text style={styles.contextButtonText}>{p.display}</Text>
-            // </Pressable>
-        
           )
         }
         </View>
         <TimerDisplay totalSeconds = {timerType.initialValue}/>
+
           <FokusButton 
             press={toogleTimer}
             title={timerRef.current ? 'Pausar' : 'Começar'}

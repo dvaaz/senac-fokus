@@ -1,8 +1,8 @@
 import { StyleSheet, Text } from "react-native-web";
 
 
-export const TimerDisplay = ( {timerSeconds} ) => {
-        const time = new Date(timerSeconds * 1000)
+export const TimerDisplay = ( {totalSeconds} ) => {
+        const time = new Date(totalSeconds * 1000)
         const options ={ minute: "2-digit", second: "2-digit" }
   return (
      <Text style={styles.timer}>
